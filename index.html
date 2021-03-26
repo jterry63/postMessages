@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+
+  <!-- Added link to the jQuery Library -->
+  <script type="text/javascript" src="https://widgets.moneydesktop.com/assets/mx-widgetloader.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+  <!-- Added a link to Bootstrap-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+</head>
+<body>
+
+    <form id="target" action="destination.html">
+        <input id="test" type="text" value="Hello there">
+        <input type="submit" value="Go">
+      </form>
+      <div id="other">
+        Trigger the handler
+      </div>
+
+         
+        <div id="md-widget"></div>
+
+
+  <script type="text/javascript">
+
+$( "#target" ).submit(function( event ) {
+  event.preventDefault();
+  var URL = $( "#test" ).val()
+  alert(URL );
+  start()
+});
+
+
+  var widgetURL = 'https://int-widgets.moneydesktop.com/md/connect/21l8g4m43tk3dA925kk5h2bmg7Z52y6b02f4x86wdvxygz06k3llxblzxrjx2xyg3qwd2c98xtb7tl2vgpAA6v7dqlygcrslwz2j4A8nx53mr8h8f3vz88Ax5qAvmlq8xj07mb0jf1cfl4ppp459phhkyksvhqd4h5brw9044rm588rltg9g3nggvgr560yrhsl1h2kA4k9xj9gj6g7gp24w59d4gsy5wjrn0m7bsvq5skmkpkdlj8lw57tstw4hAxgc3b4nggjpqdz6ppjy09lc6b40yj8n6swwAs6gp940jw05mmjdq014bA7y5pytbbp7kv0c0gqzw86A6jfvk2lgj2nzp4518db2c793'
+   function start () {
+    
+    
+
+
+
+      var myWidget = new MoneyDesktopWidgetLoader({
+        url: widgetURL,
+        width: 1000,
+        height: 700,
+        config: {
+          connect: {
+      mode: 'verification'
+    }
+  },
+  
+ 
+      });
+
+
+      var onPostMessage = function (evt) {
+    var postMessageData = JSON.parse(evt.data);
+
+    // Check to see if the post message is from MoneyDesktop
+    if (postMessageData) {
+      console.log(postMessageData)
+    }
+  };
+
+  window.addEventListener('message', onPostMessage);
+
+}
+start();
+
+</script>
+
+</body>
+</html>
+
